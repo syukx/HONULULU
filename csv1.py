@@ -122,7 +122,7 @@ def captcha():
     print("\U0001F916" * 2, "PLEASE VERIFY THAT YOU ARE NOT A ROBOT!", "\U0001F916" * 2)
     d = random.randint(0, 1)
     if d == 1:
-        f = Image.open("./")
+        f = Image.open("./captcha2.png")
         plt.imshow(f)
         plt.ion()
         plt.show()
