@@ -1,4 +1,4 @@
-import pyttsx3
+# import pyttsx3
 from PIL import Image
 import pickle
 import random
@@ -31,7 +31,7 @@ def meals():
     global t78
     b1 = "y"
     ts = pyttsx3.init()
-    i = Image.open("./relish.jpg")
+    i = Image.open("./images/relish.jpg")
     plt.imshow(i)
     plt.ion()
     plt.show()
@@ -39,7 +39,7 @@ def meals():
     ts.say("Relish Gourmet experience in flight")
     ts.runAndWait()
     plt.close()
-    i = Image.open("./prebook_meals.jpg")
+    i = Image.open("./images/prebook_meals.jpg")
     plt.imshow(i)
     plt.ion()
     plt.show()
@@ -47,7 +47,7 @@ def meals():
     ts.say("Prebook these meals for your next flight")
     ts.runAndWait()
     plt.close()
-    i = Image.open("./sandwiches.jpg")
+    i = Image.open("./images/sandwiches.jpg")
     plt.imshow(i)
     plt.ion()
     plt.show()
@@ -55,7 +55,7 @@ def meals():
     ts.say("Sandwiches")
     ts.runAndWait()
     plt.close()
-    i = Image.open("./hot_meals.jpg")
+    i = Image.open("./images/hot_meals.jpg")
     plt.imshow(i)
     plt.ion()
     plt.show()
@@ -63,7 +63,7 @@ def meals():
     ts.say("hot meals")
     ts.runAndWait()
     plt.close()
-    i = Image.open("./beverages.jpg")
+    i = Image.open("./images/beverages.jpg")
     plt.imshow(i)
     plt.ion()
     plt.show()
@@ -111,7 +111,7 @@ def meals():
 
 def captcha():
     ts = pyttsx3.init()
-    i = Image.open("./captcha.jpg")
+    i = Image.open("./images/captcha.jpg")
     plt.imshow(i)
     plt.ion()
     plt.show()
@@ -122,7 +122,7 @@ def captcha():
     print("\U0001F916" * 2, "PLEASE VERIFY THAT YOU ARE NOT A ROBOT!", "\U0001F916" * 2)
     d = random.randint(0, 1)
     if d == 1:
-        f = Image.open("./captcha2.png")
+        f = Image.open("./images/captcha2.png")
         plt.imshow(f)
         plt.ion()
         plt.show()
@@ -163,7 +163,7 @@ def captcha():
 
 def luggage(a, c, i, cls):  # argument for ADULT,CHILD,INFANT and class
     ts = pyttsx3.init()
-    f = Image.open("./wp")
+    f = Image.open("./images/luggage.jpg")
     plt.imshow(f)
     plt.ion()
     plt.show()
@@ -198,7 +198,7 @@ def coupon(p):  # price argument
     while i < len(p1):
         new_text += p1[i] + "\u0336"
         i = i + 1
-    f = Image.open("./wp")
+    f = Image.open("./images/coupon.jpg")
     plt.imshow(f)
     plt.ion()
     plt.show()
@@ -285,7 +285,7 @@ def transaction():
     print(" ")
     if cc == 1:
         print(
-            "PRESS 1 FOR SBI'\n'PRESS 2 FOR BOI'\n'PRESS 3 FOR PNB'\n'PRESS 4 FOR ICICI BANK'\n'PRESS 5 FOR AXIS BANK'\n'PRESS 6 FOR BANDHAN BANK"
+            "PRESS 1 FOR SBI'\n'PRESS 2 FOR HDFC'\n'PRESS 3 FOR PNB'\n'PRESS 4 FOR ICICI BANK'\n'PRESS 5 FOR AXIS BANK'\n'PRESS 6 FOR BANDHAN BANK"
         )
         fg = int(input("SELECT BANK FOR NET BANKING:"))
         if fg == 1 or fg == 2 or fg == 3 or fg == 4 or fg == 5 or fg == 6:
@@ -357,7 +357,7 @@ def tts(text):
 
 
 print("\U00002708" * 2, "WELCOME TO HONULULU.COM", "\U00002708" * 2)
-f = Image.open("./bhrfbhr.png")
+f = Image.open("./images/landing_page.jpg")
 plt.imshow(f)
 plt.ion()
 plt.show()
