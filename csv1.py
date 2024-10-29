@@ -1,5 +1,6 @@
 import pyttsx3
-from PIL import Image
+from PIL import Image, ImageTk
+import tkinter as tk
 import pickle
 import random
 import mysql.connector as mc
@@ -26,87 +27,68 @@ nm = ""
 ba = ""
 re = ""
 
+def show_image(image_path, speech):
+    ts = pyttsx3.init()
+    root = tk.Tk()
+
+    image = Image.open(image_path)
+    photo = ImageTk.PhotoImage(image)
+
+    label = tk.Label(root, image=photo)
+    label.pack()
+
+    # Display the image for 1 second before speaking
+    root.after(1000, lambda: ts.say(speech))  # Use lambda for delayed speech
+    root.after(1000, ts.runAndWait)  # Ensure TTS runs after 1 second
+
+    def close_window():
+        root.after(3000, root.destroy)  # Close window after 3 seconds
+
+    close_window()
+    root.mainloop()
 
 def meals():
-    global t78
-    b1 = "y"
-    ts = pyttsx3.init()
-    i = Image.open("./images/relish.jpg")
-    plt.imshow(i)
-    plt.ion()
-    plt.show()
-    plt.pause(3)
-    ts.say("Relish Gourmet experience in flight")
-    ts.runAndWait()
-    plt.close()
-    i = Image.open("./images/prebook_meals.jpg")
-    plt.imshow(i)
-    plt.ion()
-    plt.show()
-    plt.pause(3)
-    ts.say("Prebook these meals for your next flight")
-    ts.runAndWait()
-    plt.close()
-    i = Image.open("./images/sandwiches.jpg")
-    plt.imshow(i)
-    plt.ion()
-    plt.show()
-    plt.pause(4)
-    ts.say("Sandwiches")
-    ts.runAndWait()
-    plt.close()
-    i = Image.open("./images/hot_meals.jpg")
-    plt.imshow(i)
-    plt.ion()
-    plt.show()
-    plt.pause(4)
-    ts.say("hot meals")
-    ts.runAndWait()
-    plt.close()
-    i = Image.open("./images/beverages.jpg")
-    plt.imshow(i)
-    plt.ion()
-    plt.show()
-    plt.pause(4)
-    ts.say("beverages")
-    ts.runAndWait()
-    plt.close()
-    a = []
-    t78 = 0
-    a2 = []
+    tts = pyttsx3.init()
+    
+    show_image("./images/relish.jpg", "Relish Gourmet experience in flight")
+    show_image("./images/prebook_meals.jpg", "Prebook these meals for your next flight")
+    show_image("./images/hot_meals.jpg", "Hot meals")
+    show_image("./images/beverages.jpg", "Beverages")
+    
+    selected_items,meals, total_cost = [],[], 0
     print("\U0001F371" * 2, "FOOD & BEVERAGES", "\U0001F371" * 2)
-    while b1 == "y" or b1 == "Y":
-        ts.say("enter the food item number")
-        ts.runAndWait()
-        b = int(input("ENTER FOOD ITEM NO.:"))
-        a.append(b)
-        b1 = input("do you want to add more items?(y/n):".upper())
-    a.sort()
-    f = open(
-        "C:\\Users\\ansel\\PycharmProjects\\pythonProject\\comp_proj_XII_2023\\MEALS.csv",
-        "r",
-    )
-    a1 = list(csv.reader(f))
-    i1 = []
-    for i in range(1, 28):
-        i1.append(i)
-    for j in a:
-        f1 = 0
-        if j in i1:
-            f1 = 1
-            t78 += int(a1[j - 1][2])
-            a2.append(a1[j - 1][1])
-        else:
-            ts.say("please enter valid food number")
-            ts.runAndWait()
-            print("please enter valid food number".upper())
-            meals()
+    
+    while True:
+        tts.say("Enter the food item number")
+        tts.runAndWait()
+        item_number = int(input("ENTER FOOD ITEM NO.: "))
+        selected_items.append(item_number)
+        if input("Add more items? (y/n): ".upper()).lower() != 'y':
             break
-    if f1 == 1:
-        print("IN STOCKS")
-        time.sleep(2)
-        print("PROCESSING....")
-    return ["FOOD ITEMS:", a2, "TOTAL COST:", t78]
+        
+    selected_items.sort();
+    with open("./meals.csv", "r") as file:
+        menu = list(csv.reader(file))
+
+    valid_no = list(range(1, 28))
+    for item in selected_items:
+       if item in valid_no:
+            for row in menu:
+                if item==int(row[0]):
+                    total_cost+=int(row[3])
+                    meals.append(row[1])
+                    break    
+       else:
+            ts.say("Please enter a valid food number")
+            ts.runAndWait()
+            print("Please enter a valid food number".upper())
+            meals()  # Restart the function if invalid input
+    
+    print("IN STOCKS")
+    print("PROCESSING....")
+    time.sleep(2)
+    
+    return["FOOD ITEMS:", [menu[i - 1][1] for i in selected_items], "TOTAL COST:", total_cost]
 
 
 def captcha():
