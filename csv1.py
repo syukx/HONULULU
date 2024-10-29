@@ -1,4 +1,4 @@
-import pyttsx3
+# import pyttsx3
 from PIL import Image
 import pickle
 import random
