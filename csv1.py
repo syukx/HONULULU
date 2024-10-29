@@ -461,13 +461,8 @@ def add_p():
         else:
             print("PLEASE ENTER VALID ID!")
             a78 += 1
-    f1 = open(
-        "C:\\Users\\ansel\\PycharmProjects\\pythonProject\\comp_proj_XII_2023\\tc.txt",
-        "r",
-    )
-    st = f1.read()
-    print("\t\t\t\t\t\t\t\tTERMS $ CONDITIONS")
-    print(st)
+    f1=open("./terms.txt","r",encoding="utf-8")
+    print(f1.read())
     f1.close()
     return t
 
